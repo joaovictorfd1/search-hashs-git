@@ -30,6 +30,7 @@ function App() {
 
   const onSearchHashs = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
     const formData = new FormData(e.target as HTMLFormElement);
     const formValues: Record<string, string> = {};
     formData.forEach((value, key) => {
@@ -42,7 +43,7 @@ function App() {
       const url = `https://api.github.com/repos/onidata/${select_repository}/pulls/${input_hashs}/commits`;
       const response: AxiosResponse = await axios.get(url, {
         headers: {
-          Authorization: `Bearer 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`,
+          Authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
           Accept: 'application/vnd.github.v3+json',
         },
       });
