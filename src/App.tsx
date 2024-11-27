@@ -39,11 +39,13 @@ function App() {
 
     const { input_hashs, select_repository } = formValues;
 
+    const token = import.meta.env.VITE_GITHUB_TOKEN;
+
     try {
       const url = `https://api.github.com/repos/onidata/${select_repository}/pulls/${input_hashs}/commits`;
       const response: AxiosResponse = await axios.get(url, {
         headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_GITHUB_TOKEN}`,
+          Authorization: `Bearer ${token}`,
           Accept: 'application/vnd.github.v3+json',
         },
       });
